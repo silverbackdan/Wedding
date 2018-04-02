@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    varnish:
+        environment:
+            VIRTUAL_HOST: api.starter.b-w.uk
+            LETSENCRYPT_HOST: api.starter.b-w.uk
+            LETSENCRYPT_EMAIL: info@silverbackhosting.com
+            VIRTUAL_PORT: 80
+#            HTTPS_METHOD: noredirect
+        expose:
+            - 80
+        networks:
+            - default
+            - proxy
+
+    app:
+        environment:
+            VIRTUAL_HOST: starter.b-w.uk
+            LETSENCRYPT_HOST: starter.b-w.uk
+            LETSENCRYPT_EMAIL: info@silverbackhosting.com
+            VIRTUAL_PORT: 3000
+            # HTTPS_METHOD: noredirect
+        expose:
+            - 3000
+        networks:
+            - default
+            - proxy
+
+#    php:
+#        volumes:
+#            - ./api/var/log:/srv/api/var/log:rw,cached
+networks:
+  proxy:
+    external:
+      name: proxy
