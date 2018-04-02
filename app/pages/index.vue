@@ -11,7 +11,7 @@
       <div class="hero-foot">
         <div class="container has-text-centered">
           <button class="button is-dark is-large is-rounded btn-scroll" v-scroll-to="'#intro'">
-            Please Scroll
+            Scroll
           </button><br />&nbsp;
         </div>
       </div>
@@ -22,9 +22,6 @@
           <p>
             We’ve been together now for a year or two<br />
             Our wedding is coming up and we’ve invited you!
-          </p>
-          <p>
-
           </p>
         </div>
       </div>
@@ -157,7 +154,7 @@
         <div class="container has-text-centered">
           <p>
             We thank you in advance and hope we’ll be seeing you<br />
-            Because your part of our wish that we want to come true.
+            Because you're part of our wish that we want to come true.
           </p>
           <p>
             <button class="button is-success is-outlined is-large">
