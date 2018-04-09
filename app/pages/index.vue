@@ -287,6 +287,7 @@
 
 <style lang="sass">
   @import assets/css/_vars.sass
+  @import ~bulma/sass/utilities/mixins
   =input
     background: transparent
     color: inherit
@@ -319,12 +320,14 @@
       right: 1.125em
 
   .hero--feature
-    background: 50% 100% no-repeat #000
-    background-size: cover
-    background-attachment: fixed
+    background: no-repeat #000
     text-shadow: 1px 1px 4px $black, -1px -1px 4px $grey
+    +desktop
+      background-attachment: fixed
     &.top
       background-image: url('~/assets/images/wedding-hero-2.png')
+      background-position: 50% 100%
+      background-size: cover
     &.place-to-stay
       background-image: url('~/assets/images/alice-sleeps.png')
       background-position: 0 50%
