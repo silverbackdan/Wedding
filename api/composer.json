@@ -6,6 +6,7 @@
     "require": {
         "roave/security-advisories": "dev-master",
         "symfony/flex": "^1.0",
+        "symfony/framework-bundle": "^4.0",
         "symfony/proxy-manager-bridge": "^4.0",
         "symfony/swiftmailer-bundle": "^3.2"
     },
@@ -15,7 +16,8 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "^1.0",
-        "symfony/var-dumper": "^4.0"
+        "symfony/var-dumper": "^4.0",
+        "roave/security-advisories": "dev-master"
     },
     "config": {
         "preferred-install": {
