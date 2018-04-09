@@ -256,7 +256,7 @@
           index = index + 1
           if (!guest.name) this.errors.push('Please enter a name for Guest ' + index + '')
           if (!guest.food) this.errors.push('Please select a food preference for Guest ' + index + '')
-          if (!guest.music) this.errors.push('Please select where Guest ' + index + ' would be interested in playing any music')
+          if (!guest.music) this.errors.push('Please select whether Guest ' + index + ' would be interested in playing any music')
         })
         if (!this.hotel || (this.hotel === 'Other' && !this.hotelOther)) this.errors.push('Please let us know where you will be staying')
       },
