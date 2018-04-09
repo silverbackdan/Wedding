@@ -209,10 +209,10 @@
                   </ul>
                 </div>
                 <p>&nbsp;</p>
-                <div class="field">
-                  <div class="control has-text-centered">
-                    <a class="button is-primary is-fullwidth is-rounded" href="https://patchworkit.com/18708/wedding" target="_blank" rel="noopener">Click Here To Browse Our Gift Ideas</a>
-                  </div>
+              </div>
+              <div class="field">
+                <div class="control has-text-centered">
+                  <a class="button is-primary is-fullwidth is-rounded" href="https://patchworkit.com/18708/wedding" target="_blank" rel="noopener">Click Here To Browse Our Gift Ideas</a>
                 </div>
               </div>
             </div>
