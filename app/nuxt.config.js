@@ -43,7 +43,8 @@ module.exports = {
    */
   cache: true,
   plugins: [
-    { src: '~/plugins/vue-scrollto.js', ssr: false }
+    { src: '~/plugins/vue-scrollto.js', ssr: false },
+    { src: '~/plugins/fontawesome', ssr: true }
   ],
   /**
    * Modules

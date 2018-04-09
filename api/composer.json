@@ -1,24 +1,20 @@
 {
-    "name": "silverbackis/bw-starter-website",
+    "name": "silverbackis/suz-dan-wedding",
     "type": "project",
-    "license": "MIT",
-    "description": "BW Starter Website API using API Platform",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/silverbackis/ApiComponentBundle"
-        }
-    ],
+    "license": "unlicensed",
+    "description": "Wedding website for Dan and Suz",
     "require": {
+        "roave/security-advisories": "dev-master",
         "symfony/flex": "^1.0",
         "symfony/proxy-manager-bridge": "^4.0",
-        "roave/security-advisories": "dev-master"
+        "symfony/swiftmailer-bundle": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",
         "symfony/dotenv": "^3.4 || ^4.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
+        "symfony/profiler-pack": "^1.0",
         "symfony/var-dumper": "^4.0"
     },
     "config": {
@@ -57,7 +53,5 @@
             "id": "01C0VV89JMTFVSVWMQMEERA3FA",
             "allow-contrib": "true"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

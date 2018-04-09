@@ -151,29 +151,148 @@
     </section>
     <section class="hero is-fullheight has-text-centered hero--content">
       <div class="hero-body">
-        <div class="container has-text-centered">
-          <p>
-            We thank you in advance and hope we’ll be seeing you<br />
-            Because you're part of our wish that we want to come true.
-          </p>
-          <p>
-            <button class="button is-success is-outlined is-large">
-              RSVP Now
-            </button>
-          </p>
+        <div class="container">
+          <section class="section has-text-centered">
+            <p>
+              We thank you in advance and hope we’ll be seeing you<br />
+              Because you're part of our wish that we want to come true.
+            </p>
+          </section>
+          <section class="columns is-centered">
+            <div class="column is-6">
+              <div v-if="submitSuccess">
+                <h1 class="title is-1">Thank you!</h1>
+                <h2 class="subtitle is-3">We can't wait to see you</h2>
+              </div>
+              <div v-else class="has-text-left">
+                <form-person v-for="(guest, index) in guests"
+                             :key="index"
+                             :count="index"
+                             :guest="guest"
+                             v-on:remove="guests.splice(index, 1)"
+                />
+                <div class="field add-guest-field">
+                  <div class="control">
+                    <button class="button is-light is-outlined is-fullwidth is-rounded" @click="addGuest">+ Guest</button>
+                  </div>
+                </div>
+                <p>&nbsp;</p>
+                <div class="field has-text-left">
+                  <label class="label">Where are you staying?</label>
+                  <div class="control">
+                    <div class="select is-fullwidth is-rounded">
+                      <select v-model="hotel">
+                        <option value="" disabled>Please select</option>
+                        <option>Speech House</option>
+                        <option>Little Dean Hotel</option>
+                        <option>Deanfield B&B</option>
+                        <option>The Angel Hotel</option>
+                        <option>The Royal Oak Free House</option>
+                        <option>Not Staying Locally</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field" v-if="hotel === 'Other'">
+                  <div class="control">
+                    <input class="input is-rounded" type="text" placeholder="Please enter where you are staying" v-model="hotelOther">
+                  </div>
+                </div>
+                <p>&nbsp;</p>
+                <div class="field">
+                  <div class="control">
+                    <button class="button is-fullwidth is-success is-large is-rounded" :class="{'is-loading': submitting}" @click="submit">Send RSVP</button>
+                  </div>
+                  <ul class="help is-danger is-size-5" v-if="errors.length">
+                    <li v-for="error in errors">{{error}}</li>
+                  </ul>
+                </div>
+                <p>&nbsp;</p>
+                <div class="field">
+                  <div class="control has-text-centered">
+                    <a class="button is-primary is-fullwidth is-rounded" href="https://patchworkit.com/18708/wedding" target="_blank" rel="noopener">Click Here To Browse Our Gift Ideas</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
 <script>
-
+  import FormPerson from '~/components/form_person'
+  export default {
+    components: { FormPerson },
+    data () {
+      return {
+        guests: [this.newGuest()],
+        hotel: '',
+        hotelOther: '',
+        submitting: false,
+        errors: [],
+        submitSuccess: false
+      }
+    },
+    methods: {
+      newGuest () {
+        return {
+          name: null,
+          food: null,
+          allergies: null,
+          music: null
+        }
+      },
+      addGuest () {
+        this.guests.push(this.newGuest())
+      },
+      validate () {
+        this.errors = []
+        if (!this.guests.length) this.errors.push('At least 1 guest should be submitted')
+        this.guests.forEach((guest, index) => {
+          index = index + 1
+          if (!guest.name) this.errors.push('Please enter a name for Guest ' + index + '')
+          if (!guest.food) this.errors.push('Please select a food preference for Guest ' + index + '')
+          if (!guest.music) this.errors.push('Please select where Guest ' + index + ' would be interested in playing any music')
+        })
+        if (!this.hotel || (this.hotel === 'Other' && !this.hotelOther)) this.errors.push('Please let us know where you will be staying')
+      },
+      submit () {
+        this.validate()
+        if (this.errors.length) {
+          return
+        }
+        this.submitting = true
+        this.$axios.post('/rsvp', {
+          guests: this.guests,
+          hotel: this.hotel,
+          hotelOther: this.hotelOther
+        })
+          .then((response) => {
+            console.log(response)
+            this.submitting = false
+            this.submitSuccess = true
+          })
+          .catch((error) => {
+            console.log(error)
+            this.submitting = false
+          })
+      }
+    }
+  }
 </script>
 
 <style lang="sass">
   @import assets/css/_vars.sass
+  =input
+    background: transparent
+    color: inherit
+    border: 1px solid $white
+    box-shadow: inset 0 0 8px 1px #fff
+    font-family: inherit
   .btn-scroll.is-rounded
     padding-left: 55px
     padding-right: 55px
@@ -204,9 +323,6 @@
     background-size: cover
     background-attachment: fixed
     text-shadow: 1px 1px 4px $black, -1px -1px 4px $grey
-    .title,
-    .subtitle
-      color: $white
     &.top
       background-image: url('~/assets/images/wedding-hero-2.png')
     &.place-to-stay
@@ -238,17 +354,30 @@
     background: $grey-darker
     p + p
       margin-top: 1rem
-    p,
+    section > p,
+    .hero-body > .container > p,
     .label
-      font-size: 1.4rem
+      font-size: 1.2rem
       color: inherit
+    .label
+      color: $grey-light
+
     .input
-      background: transparent
-      color: inherit
-      border: 0
-      box-shadow: inset 0 0 8px 1px #fff
-      text-align: center
-      font-family: inherit
-      +placeholder
-        color: rgba($white, .3)
+      +input
+    .select
+      &:not(.is-multiple)::after
+        border-color: $white !important
+      select
+        +input
+        +placeholder
+          color: rgba($white, .3)
+    .checkbox:hover,
+    .radio:hover
+      color: $white
+  .add-guest-field
+    margin-top: 1rem
+
+  .title,
+  .subtitle
+    color: $white
 </style>

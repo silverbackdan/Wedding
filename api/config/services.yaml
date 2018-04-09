@@ -6,8 +6,6 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-        bind:
-            $projectDir: '%kernel.project_dir%'
 
     App\:
         resource: '../src/*'
@@ -17,9 +15,9 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\DataFixtures\:
-        resource: '../src/DataFixtures'
-        tags: ['doctrine.fixture.orm']
+#    App\DataFixtures\:
+#        resource: '../src/DataFixtures'
+#        tags: ['doctrine.fixture.orm']
 
     #App\Form\Handler\:
     #    resource: '../src/Form/Handler/*'

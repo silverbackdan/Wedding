@@ -1,3 +1,4 @@
 .idea/
 docker
 tests/Functional/
+.DS_Store
