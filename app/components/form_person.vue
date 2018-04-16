@@ -10,47 +10,69 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Food:</label>
+      <label class="label">Attending?</label>
       <div class="field-body">
         <div class="field is-narrow">
           <div class="control">
             <label class="radio">
-              <input type="radio" name="food" value="Hog Roast" v-model="guest.food">
-              Hog Roast
+              <input type="radio" name="attending" value="Yes" v-model="guest.attending">
+              Yes
             </label>
             <label class="radio">
-              <input type="radio" name="food" value="Vegetarian Burgers" v-model="guest.food">
-              Vegetarian Burgers
-            </label>
-            <label class="radio">
-              <input type="radio" name="food" value="Vegan" v-model="guest.food">
-              Vegan
+              <input type="radio" name="attending" value="No" v-model="guest.attending">
+              No
             </label>
           </div>
         </div>
       </div>
     </div>
-    <div class="field">
-      <label class="label">Allergies / Special Requirements:</label>
-      <div class="control">
-        <input class="input is-rounded" type="text" placeholder="E.g. nut allergy" v-model="guest.allergies">
-      </div>
+    <div v-if="guest.attending === 'No'">
+      <p>We are sorry you won't be able to make it {{ guest.name }}</p>
     </div>
-    <div class="field">
-      <label class="label">Musician? Would you be up for playing a song or two?</label>
-      <div class="field-body">
-        <div class="field is-narrow">
-          <div class="control">
-            <label class="radio">
-              <input type="radio" name="music" value="Yes" v-model="guest.music">
-              Yes
-            </label>
-            <label class="radio">
-              <input type="radio" name="music" value="No" v-model="guest.music">
-              No
-            </label>
+    <div v-if="guest.attending === 'Yes'">
+      <div class="field">
+        <label class="label">Food:</label>
+        <div class="field-body">
+          <div class="field is-narrow">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="food" value="Hog Roast" v-model="guest.food">
+                Hog Roast
+              </label>
+              <label class="radio">
+                <input type="radio" name="food" value="Vegetarian Burgers" v-model="guest.food">
+                Vegetarian Burgers
+              </label>
+              <label class="radio">
+                <input type="radio" name="food" value="Vegan" v-model="guest.food">
+                Vegan
+              </label>
+            </div>
           </div>
-          <p class="help" v-if="guest.music === 'Yes'">Great! Daniel will be in touch with you to arrange this</p>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Allergies / Special Requirements:</label>
+        <div class="control">
+          <input class="input is-rounded" type="text" placeholder="E.g. nut allergy" v-model="guest.allergies">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Musician? Would you be up for playing a song or two?</label>
+        <div class="field-body">
+          <div class="field is-narrow">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="music" value="Yes" v-model="guest.music">
+                Yes
+              </label>
+              <label class="radio">
+                <input type="radio" name="music" value="No" v-model="guest.music">
+                No
+              </label>
+            </div>
+            <p class="help" v-if="guest.music === 'Yes'">Great! Daniel will be in touch with you to arrange this</p>
+          </div>
         </div>
       </div>
     </div>

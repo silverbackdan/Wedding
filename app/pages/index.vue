@@ -6,13 +6,9 @@
           <h1 class="title">
             Suzanne & Daniel Are Getting Married
           </h1>
-        </div>
-      </div>
-      <div class="hero-foot">
-        <div class="container has-text-centered">
           <button class="button is-dark is-large is-rounded btn-scroll" v-scroll-to="'#intro'">
             Scroll
-          </button><br />&nbsp;
+          </button>
         </div>
       </div>
     </section>
@@ -243,7 +239,8 @@
           name: null,
           food: null,
           allergies: null,
-          music: null
+          music: null,
+          attending: null
         }
       },
       addGuest () {
@@ -255,6 +252,7 @@
         this.guests.forEach((guest, index) => {
           index = index + 1
           if (!guest.name) this.errors.push('Please enter a name for Guest ' + index + '')
+          if (!guest.attending) this.errors.push('Please select whether Guest ' + index + ' will be attending or not')
           if (!guest.food) this.errors.push('Please select a food preference for Guest ' + index + '')
           if (!guest.music) this.errors.push('Please select whether Guest ' + index + ' would be interested in playing any music')
         })
@@ -340,13 +338,19 @@
       background-image: url('~/assets/images/white-rabbit-trumpet.png')
       background-position: 0 50%
       background-size: auto 100%
+      +mobile
+        background-size: 50% auto
     &.cast
       background-image: url('~/assets/images/aiw-cast.jpg')
       background-position: 50% 0
+      background-size: cover
     &.rsvp
       background-image: url('~/assets/images/dan-suz.png')
       background-position: 0 0
       background-size: auto 100%
+      +mobile
+        background-image: url('~/assets/images/dan-suz-mobile.png')
+        background-size: 100% auto
     h1
       font-size: 2rem
   .hero--content
