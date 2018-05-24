@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:9-alpine
 
 # ARG app_env
 # ENV APP_ENV $app_env
